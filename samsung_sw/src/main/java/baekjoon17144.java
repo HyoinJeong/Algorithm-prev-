@@ -89,24 +89,35 @@ public class baekjoon17144 {
 
     // 공기청정기 가동
     public static void move(int clean){
-        for(int i = clean-2; i>=0; i--)
-            map[i+1][0] = map[i][0];
-        for(int i = 0; i<C-1; i++)
-            map[0][i] = map[0][i+1];
-        for(int i = 0; i<clean; i++)
-            map[i][C-1] = map[i+1][C-1];
-        for(int i = C-1; i>1; i--)
-            map[clean][i] = map[clean][i-1];
-        map[clean][1] = 0;
+        // 윗부분(반시계방향)
+        // 아래로 당기기
+        for(int i=clean-1; i>0; i--)
+            map[i][0]=map[i-1][0];
+        // 왼쪽으로 당기기
+        for (int i=0; i<C-1; i++)
+            map[0][i]=map[0][i+1];
+        // 위로 당기기
+        for(int i=0; i<clean; i++)
+            map[i][C-1]=map[i+1][C-1];
+        // 오른쪽으로 당기기
+        for(int i=C-1; i>1; i--)
+            map[clean][i]=map[clean][i-1];
+        map[clean][1]=0;
 
-        for(int i = clean+2; i<R-1; i++)
-            map[i][0] = map[i+1][0];
-        for(int i = 0; i<C-1; i++)
-            map[R-1][i] = map[R-1][i+1];
-        for(int i = R-1; i>clean+1; i--)
-            map[i][C-1] = map[i-1][C-1];
-        for(int i = C-1; i>1; i--)
-            map[clean+1][i] = map[clean+1][i-1];
-        map[clean+1][1] = 0;
+        // 아래부분(시계방향)
+        int down=clean+1;
+        // 위로 당기기
+        for(int i=down+1; i<R-1; i++)
+            map[i][0]=map[i+1][0];
+        // 왼쪽으로 당기기
+        for(int i=0; i<C-1; i++)
+            map[R-1][i]=map[R-1][i+1];
+        // 아래로 당기기
+        for(int i=R-1; i>down; i--)
+            map[i][C-1]=map[i-1][C-1];
+        // 오른쪽으로 당기기
+        for(int i=C-1; i>1; i--)
+            map[down][i]=map[down][i-1];
+        map[down][1]=0;
     }
 }
